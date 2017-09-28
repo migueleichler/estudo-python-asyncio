@@ -1,26 +1,31 @@
 import asyncio
 import time
+from datetime import datetime
+
+nomes_tasks = ['A', 'B', 'C', 'D', 'E', 'F']
 
 def get_intervalo_tempo(inicio):
-    return int(time.time() - inicio)
+    atual = datetime.now()
+    intervalo = (atual - inicio).total_seconds()
+    return intervalo
 
-async def incrementar_por_n_segundos(loop, segundos):
+async def incrementar_por_n_segundos(segundos):
     num = 0
-    fim_loop = loop.time() + segundos
-    while True:
+    inicio = datetime.now()
+    nome_task = nomes_tasks.pop(0)
+    while segundos >= num:
         num += 1
-        if (loop.time() + 1.0) >= fim_loop:
-            break
+        print('Iteração %i da Task %s - %i segundos' %
+          (num, nome_task, get_intervalo_tempo(inicio)))
+        # O método sleep recebe como parâmetro a quantidade de segundos que
+        # a task ficará em estado de pausa.
         await asyncio.sleep(1)
 
-    print(num)
-
-loop = asyncio.get_event_loop()
-tasks = [
-    loop.create_task(incrementar_por_n_segundos(loop, 3.0)),
-    loop.create_task(incrementar_por_n_segundos(loop, 5.0)),
-]
-inicio_loop = time.time()
-loop.run_until_complete(asyncio.wait(tasks))
-print(get_intervalo_tempo(inicio_loop))
-loop.close()
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    tasks = [
+        loop.create_task(incrementar_por_n_segundos(3)),
+        loop.create_task(incrementar_por_n_segundos(5)),
+    ]
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
