@@ -3,6 +3,8 @@ from datetime import datetime
 
 
 nomes_tasks = ['A', 'B', 'C', 'D', 'E', 'F']
+MSG_INI = 'Início da Iteração %i da Task %s - %s'
+MSG_FIM = 'Fim da Iteração %i da Task %s - %s'
 
 
 def get_intervalo_tempo(inicio):
@@ -14,13 +16,10 @@ def get_intervalo_tempo(inicio):
 # 1 - Para indicar que a subrotina é assíncrona é preciso adicionar a
 # palavra-chave async antes da palavra-chave def.
 async def iterar_por_n_segundos(segundos):
-    iteracao = 0
-    inicio = datetime.now()
-    nome_task = nomes_tasks.pop(0)
-    while segundos >= iteracao:
-        iteracao += 1
-        args = (iteracao, nome_task, datetime.now().strftime('%H:%M:%S'))
-        print('Iteração %i da Task %s - %s' % args)
+    inicio_task = datetime.now()
+    task = nomes_tasks.pop(0)
+    for i in range(1, segundos + 1):
+        print(MSG_INI % (i, task, datetime.now().strftime('%H:%M:%S')))
         # 2 - A palavra-chave await é parte da biblioteca asyncio e ela define
         # que a execução da subrotina incrementar_por_n_segundos será suspensa
         # até o término do método sleep.
@@ -28,7 +27,10 @@ async def iterar_por_n_segundos(segundos):
         # a task ficará em estado de pausa.
         await asyncio.sleep(1)
 
-    print('\nDuração total: %i segundos' % get_intervalo_tempo(inicio))
+        print(MSG_FIM % (i, task, datetime.now().strftime('%H:%M:%S')))
+
+    duracao_task = get_intervalo_tempo(inicio_task)
+    print('\nDuração total Task %s: %i segundos\n' % (task, duracao_task))
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
