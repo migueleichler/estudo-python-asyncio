@@ -9,14 +9,15 @@ def get_intervalo_tempo(inicio):
 
 
 def iterar_por_n_segundos(segundos):
-    iteracao = 0
-    while segundos >= iteracao:
-        iteracao += 1
-        args = (iteracao, datetime.now().strftime('%H:%M:%S'))
-        print('Iteração %i - %s' % args)
+    for i in range(1, segundos + 1):
+        print('Inicio Iteração', i, '-',
+              datetime.now().strftime('%H:%M:%S'))
         # O método sleep recebe como parâmetro a quantidade de segundos que
         # a rotina ficará com a sua execução em suspenso.
         time.sleep(1)
+
+        print('Fim Iteração', i, '-',
+              datetime.now().strftime('%H:%M:%S'))
 
 
 if __name__ == '__main__':
