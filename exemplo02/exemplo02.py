@@ -10,13 +10,13 @@ import asyncio
 # 2 - call_later() --> para casos em que se deseja definir o intervalo de tempo
 #                      que se deseja postergar a execução da função.
 # Callback é uma função que é passada como argumento para outra função
-# e é invocada após algum tipo de eventoo término da execução da sua
+# e é invocada após algum tipo de evento de término da execução da sua
 # função pai.
-def exibir_palavra(palavra, loop):
+def soletrar_palavra(palavra, loop):
     print(palavra[0])
     palavra = palavra[1:]
     if len(palavra) > 0:
-        loop.call_later(1, exibir_palavra, palavra, loop)
+        loop.call_later(1, soletrar_palavra, palavra, loop)
     else:
         loop.stop()
 
@@ -24,7 +24,7 @@ def exibir_palavra(palavra, loop):
 loop = asyncio.get_event_loop()
 
 # Chamada incial da função exibir_alfabeto()
-loop.call_soon(exibir_palavra, 'paralelepipedo', loop)
+loop.call_soon(soletrar_palavra, 'paralelepipedo', loop)
 
 loop.run_forever()
 loop.close()
