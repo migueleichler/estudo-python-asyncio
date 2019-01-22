@@ -6,7 +6,7 @@ De acordo com a documentação oficial da linguagem Python, a biblioteca asyncio
 
 Traduzido para o português a biblioteca asyncio é um módulo que fornece a infra-estrutura para escrever código de execução concorrente em uma thread única (single-threaded), utilizando para isso corotinas, multiplexação de E/S sobre sockets e outros recursos.
 
-A característica da biblioteca asyncio, citada acima, de execução baseada em uma thread única (single-threaded) está relacionada ao funcionamento do CPython, o interpretador padrão da linguagem Python, que de acordo com a documentação oficial da prórpia linguagem, implementa o Global Interpreter Lock (GIL), um mecanismo que limita a execução do código Python a apenas uma thread por vez.
+A característica da biblioteca asyncio, citada acima, de execução baseada em uma thread única (single-threaded) está relacionada ao funcionamento do CPython - a implementação padrão do Python, escrita na linguagem C - que de acordo com a documentação oficial da prórpia linguagem, implementa o Global Interpreter Lock (GIL), um mecanismo que limita a execução do código Python a apenas uma thread por vez.
 
 O interpretador CPython utiliza as threads do sistema operacional, o que significa que cada vez que uma requisição para criar uma nova thread é feita, o interpretador na verdade realiza chamadas para as bibliotecas e o núcleo do sistema operacional para gerarem uma nova thread.
 
