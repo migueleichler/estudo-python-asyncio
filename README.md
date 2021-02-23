@@ -23,3 +23,5 @@ A interrupção de hardware é quando um sinal de um dispositivo que tipicamente
 Enquanto threads são escalonados de forma preemptiva, corotinas são escalonadas manualmente pelo programa através de chamadas específicas (resume, yield, transfer, etc).
 
 Isso funciona muito bem para códigos I/O-Bound, como acesso à rede e ao disco. Mas não consegue usar mais de um processador em sua aplicação CPU-Bound.
+
+But JavaScript, Python, and Ruby are not ideal to tackle large-scale concurrency challenges. (Luciano Ramalho) https://blog.jetbrains.com/pycharm/2018/04/interview-with-luciano-ramalho-webinar-presenter-this-thursday/
